@@ -50,7 +50,12 @@ Or on the `afFieldInput` component or any component that passes along attributes
 {{> afFieldInput name="typeTest" type="bootstrap-datepicker"}}
 ```
 
-It's tested to work with `type: Date` schema keys, but ideally should work with `String` or `Number`, too, or an array of any of those.
+This input type is intended to be used with `type: Date` schema keys, but it also works with other schema types. Here's a list:
+
+* `Date`: Value is stored as a `Date` object representing midnight in the UTC timezone on the morning of the selected date.
+* `String`: Value is stored as a string representation of the selected date in ISO format, e.g., "2014-11-25".
+* `Number`: Value is stored as the result of calling `getTime()` on the `Date` object (representing midnight in the UTC timezone on the morning of the selected date).
+* `Array`: If the schema expects an array of `Date` or `String` or `Number`, the value is converted to a one-item array and stored.
 
 To provide bootstrap-datepicker options, set a `datePickerOptions` attribute equal to a helper that returns the options object. Most of the `data-date` attributes that the plugin recognizes should also work.
 
