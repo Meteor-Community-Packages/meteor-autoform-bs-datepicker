@@ -12,7 +12,7 @@ In a Meteor app directory, enter:
 ```
 $ meteor add mizzao:bootstrap-3
 $ meteor add rajit:bootstrap3-datepicker
-$ meteor add aldeed:autoform@4.0.0-rc9
+$ meteor add aldeed:autoform
 ```
 
 ## Installation
