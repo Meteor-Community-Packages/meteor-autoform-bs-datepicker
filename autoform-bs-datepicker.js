@@ -72,7 +72,7 @@ Template.afBootstrapDatepicker.rendered = function () {
 
     // set start date if there's a min in the schema
     if (data.min instanceof Date) {
-      // datepicker plugin expects local Date object, 
+      // datepicker plugin expects local Date object,
       // so convert UTC Date object to local
       var startDate = utcToLocal(data.min);
       $input.datepicker('setStartDate', startDate);
@@ -80,7 +80,7 @@ Template.afBootstrapDatepicker.rendered = function () {
 
     // set end date if there's a max in the schema
     if (data.max instanceof Date) {
-      // datepicker plugin expects local Date object, 
+      // datepicker plugin expects local Date object,
       // so convert UTC Date object to local
       var endDate = utcToLocal(data.max);
       $input.datepicker('setEndDate', endDate);
