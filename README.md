@@ -10,7 +10,7 @@ Bootstrap and the plugin library must be installed separately.
 In a Meteor app directory, enter:
 
 ```
-$ meteor add mizzao:bootstrap-3
+$ meteor add twbs:bootstrap
 $ meteor add rajit:bootstrap3-datepicker
 $ meteor add aldeed:autoform
 ```
