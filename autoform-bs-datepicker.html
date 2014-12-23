@@ -1,3 +1,10 @@
 <template name="afBootstrapDatepicker">
-  <input type="text" value="" {{atts}}/>
+  {{#if atts.buttonClasses}}
+    <div class="input-group date">
+      <input type="text" value="" {{atts}}/><span class="input-group-addon"><i class="{{atts.buttonClasses}}"></i></span>
+    </div>
+  {{/if}}
+  {{#unless atts.buttonClasses}}
+    <input type="text" value="" {{atts}}/>
+  {{/unless}}
 </template>

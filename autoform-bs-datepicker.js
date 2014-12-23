@@ -1,5 +1,3 @@
-/* global AutoForm */
-
 AutoForm.addInputType("bootstrap-datepicker", {
   template: "afBootstrapDatepicker",
   valueOut: function () {
@@ -37,14 +35,20 @@ AutoForm.addInputType("bootstrap-datepicker", {
 });
 
 Template.afBootstrapDatepicker.helpers({
-    atts: function addFormControlAtts() {
-      var atts = _.clone(this.atts);
-      // Add bootstrap class
-      atts = AutoForm.Utility.addClass(atts, "form-control");
-      delete atts.datePickerOptions;
-      return atts;
-    }
-  });
+  atts: function addFormControlAtts() {
+    var atts = _.clone(this.atts);
+    // Add bootstrap class
+    atts = AutoForm.Utility.addClass(atts, "form-control");
+    delete atts.datePickerOptions;
+    return atts;
+  }
+});
+
+Template.afBootstrapDatepicker.events({
+  "click .input-group.date .input-group-addon": function(event) {
+    $(event.currentTarget).prev().datepicker("show");
+  }
+});
 
 Template.afBootstrapDatepicker.rendered = function () {
   var $input = this.$('input');
@@ -66,21 +70,18 @@ Template.afBootstrapDatepicker.rendered = function () {
 
     // set start date if there's a min in the schema
     if (data.min instanceof Date) {
-      // datepicker plugin expects local Date object,
-      // so convert UTC Date object to local
+      // datepicker plugin expects local Date object, so convert UTC Date object to local
       var startDate = utcToLocal(data.min);
       $input.datepicker('setStartDate', startDate);
     }
 
     // set end date if there's a max in the schema
     if (data.max instanceof Date) {
-      // datepicker plugin expects local Date object,
-      // so convert UTC Date object to local
+      // datepicker plugin expects local Date object, so convert UTC Date object to local
       var endDate = utcToLocal(data.max);
       $input.datepicker('setEndDate', endDate);
     }
   });
-
 };
 
 Template.afBootstrapDatepicker.destroyed = function () {
