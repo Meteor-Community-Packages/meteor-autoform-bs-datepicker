@@ -3,8 +3,7 @@
     <div class="input-group date">
       <input type="text" value="" {{atts}}/><span class="input-group-addon"><i class="{{atts.buttonClasses}}"></i></span>
     </div>
-  {{/if}}
-  {{#unless atts.buttonClasses}}
+  {{else}}
     <input type="text" value="" {{atts}}/>
-  {{/unless}}
+  {{/if}}
 </template>

@@ -1,4 +1,4 @@
-/* global AutoForm */
+/* global AutoForm, $ */
 
 AutoForm.addInputType("bootstrap-datepicker", {
   template: "afBootstrapDatepicker",
