@@ -37,14 +37,20 @@ AutoForm.addInputType("bootstrap-datepicker", {
 });
 
 Template.afBootstrapDatepicker.helpers({
-    atts: function addFormControlAtts() {
-      var atts = _.clone(this.atts);
-      // Add bootstrap class
-      atts = AutoForm.Utility.addClass(atts, "form-control");
-      delete atts.datePickerOptions;
-      return atts;
-    }
-  });
+  atts: function addFormControlAtts() {
+    var atts = _.clone(this.atts);
+    // Add bootstrap class
+    atts = AutoForm.Utility.addClass(atts, "form-control");
+    delete atts.datePickerOptions;
+    return atts;
+  }
+});
+
+Template.afBootstrapDatepicker.events({
+  "click .input-group.date .input-group-addon": function(event) {
+    $(event.currentTarget).prev().datepicker("show");
+  }
+});
 
 Template.afBootstrapDatepicker.rendered = function () {
   var $input = this.$('input');
@@ -80,7 +86,6 @@ Template.afBootstrapDatepicker.rendered = function () {
       $input.datepicker('setEndDate', endDate);
     }
   });
-
 };
 
 Template.afBootstrapDatepicker.destroyed = function () {
