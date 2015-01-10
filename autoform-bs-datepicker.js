@@ -46,14 +46,8 @@ Template.afBootstrapDatepicker.helpers({
   }
 });
 
-Template.afBootstrapDatepicker.events({
-  "click .input-group.date .input-group-addon": function(event) {
-    $(event.currentTarget).prev().datepicker("show");
-  }
-});
-
 Template.afBootstrapDatepicker.rendered = function () {
-  var $input = this.$('input');
+  var $input = this.data.atts.buttonClasses ? this.$('.input-group.date') : this.$('input');
   var data = this.data;
 
   // instanciate datepicker
@@ -89,7 +83,8 @@ Template.afBootstrapDatepicker.rendered = function () {
 };
 
 Template.afBootstrapDatepicker.destroyed = function () {
-  this.$('input').datepicker('remove');
+  var $input = this.data.atts.buttonClasses ? this.$('.input-group.date') : this.$('input');
+  $input.datepicker('remove');
 };
 
 function utcToLocal(utcDate) {
