@@ -28,10 +28,15 @@ AutoForm.addInputType("bootstrap-datepicker", {
       return val;
     },
     "dateArray": function (val) {
-      if (val instanceof Date) {
-        return [val];
-      }
-      return val;
+      var valArray = this.datepicker('getUTCDates');
+      var allAreDates = _.filter(valArray, function(val){ return val instanceof Date; });
+      
+        if (valArray.length === allAreDates.length) {
+          return valArray;
+        }
+        else {
+          return val;
+        }
     }
   }
 });
