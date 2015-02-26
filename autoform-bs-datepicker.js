@@ -77,16 +77,6 @@ Template.afBootstrapDatepicker.rendered = function () {
         $input.datepicker('update', data.value);
       }
     }
-    
-    var valArray = this.datepicker('getUTCDates');
-      var allAreDates = _.filter(valArray, function(val){ return val instanceof Date; });
-      
-        if (valArray.length === allAreDates.length) {
-          return valArray;
-        }
-        else {
-          return val;
-        }
 
     // set start date if there's a min in the schema
     if (data.min instanceof Date) {
