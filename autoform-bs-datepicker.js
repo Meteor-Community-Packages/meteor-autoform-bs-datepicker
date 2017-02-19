@@ -29,10 +29,15 @@ AutoForm.addInputType("bootstrap-datepicker", {
       return val;
     },
     "dateArray": function (val) {
-      if (val instanceof Date) {
-        return [val];
-      }
-      return val;
+      var valArray = this.datepicker('getUTCDates');
+      var allAreDates = _.filter(valArray, function(val){ return val instanceof Date; });
+      
+        if (valArray.length === allAreDates.length) {
+          return valArray;
+        }
+        else {
+          return val;
+        }
     }
   }
 });
@@ -63,6 +68,15 @@ Template.afBootstrapDatepicker.rendered = function () {
       $input.datepicker('setUTCDate', data.value);
     } else if (typeof data.value === "string") {
       $input.datepicker('update', data.value);
+    }
+    
+    if (_.isArray(data.value)) {
+      var allAreDates = _.filter(data.value, function(val){ return val instanceof Date; });
+      if (data.value.length === allAreDates.length) {
+          $input.datepicker('setUTCDates', data.value);
+      } else {
+        $input.datepicker('update', data.value);
+      }
     }
 
     // set start date if there's a min in the schema
