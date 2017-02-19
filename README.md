@@ -34,11 +34,15 @@ In the schema, which will then work with a `quickForm` or `afQuickFields`:
   date: {
     type: Date,
     autoform: {
-      type: "bootstrap-datepicker"
+      type: "bootstrap-datepicker",
+      datePickerOptions: {
+        autoclose: true
+      }
     }
   }
 }
 ```
+Options for the bs-datepicker plugin can be found [here](https://bootstrap-datepicker.readthedocs.org/en/latest/options.html).
 
 Or on the `afFieldInput` component or any component that passes along attributes to `afFieldInput`:
 
