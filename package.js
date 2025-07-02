@@ -9,7 +9,7 @@ Package.onUse(function(api) {
   api.versionsFrom('2.16');
   api.use('templating@1.0.0 || 1.4.4');
   api.use('blaze@2.0.0 || 2.9.0 || 3.0.1');
-  api.use('underscore');
+  api.use('aldeed:autoform@6.0.0 || 7.1.0 || 8.0.0');
   api.use('aldeed:autoform@6.0.0');
   api.addFiles([
     'autoform-bs-datepicker.html',

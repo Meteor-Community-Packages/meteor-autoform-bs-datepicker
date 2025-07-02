@@ -38,7 +38,7 @@ AutoForm.addInputType('bootstrap-datepicker', {
 
 Template.afBootstrapDatepicker.helpers({
   atts: function addFormControlAtts() {
-    var atts = _.clone(this.atts);
+    var atts = { ...this.atts };
     // Add bootstrap class
     atts = AutoForm.Utility.addClass(atts, 'form-control');
     delete atts.datePickerOptions;
@@ -75,7 +75,7 @@ Template.afBootstrapDatepicker.onRendered(function onRendered() {
         if (allArrayItemsAreDates(nextValue)) {
           $input.datepicker('setUTCDates', nextValue);
         } else if (allArrayItemsAreValidDateStrings(nextValue)) {
-          var nextUTCDates = _.map(nextValue, function (dateString) {
+          var nextUTCDates = nextValue.map(function (dateString) {
             return utcToLocal(new Date(dateString + 'T00:00:00.000Z'));
           });
           $input.datepicker('setUTCDates', nextUTCDates);
@@ -123,12 +123,12 @@ function utcToLocal(utcDate) {
 }
 
 function allArrayItemsAreDates(items) {
-  var nonDates = _.filter(items, function(val) { return !(val instanceof Date); });
+  var nonDates = items.filter(function(val) { return !(val instanceof Date); });
   return nonDates.length === 0;
 }
 
 function allArrayItemsAreValidDateStrings(items) {
-  var nonValid = _.filter(items, function(val) {
+  var nonValid = items.filter(function(val) {
     return !(typeof val === 'string' && AutoForm.Utility.isValidDateString(val));
   });
   return nonValid.length === 0;
