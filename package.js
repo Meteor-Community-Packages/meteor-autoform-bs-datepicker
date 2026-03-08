@@ -1,7 +1,7 @@
 Package.describe({
   name: 'aldeed:autoform-bs-datepicker',
   summary: 'Custom bootstrap-datepicker input type for AutoForm',
-  version: '2.1.0',
+  version: '2.1.0-rc.0',
   git: 'https://github.com/aldeed/meteor-autoform-bs-datepicker.git'
 });
 

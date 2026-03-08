@@ -47,11 +47,30 @@ Template.afBootstrapDatepicker.helpers({
 });
 
 Template.afBootstrapDatepicker.onRendered(function onRendered() {
-  var $input = this.data.atts.buttonClasses ? this.$('.input-group.date') : this.$('input');
+  var hasButton = Boolean(this.data.atts.buttonClasses);
+  var $input = this.$('input');
   var data = this.data;
+  var datePickerOptions = data.atts.datePickerOptions ? { ...data.atts.datePickerOptions } : {};
 
-  // instanciate datepicker
-  $input.datepicker(data.atts.datePickerOptions);
+  // Default autoclose to true so the picker closes after selection
+  if (datePickerOptions.autoclose === undefined) {
+    datePickerOptions.autoclose = true;
+  }
+
+  // instanciate datepicker on the input element
+  $input.datepicker(datePickerOptions);
+
+  // Ensure input value updates and AutoForm detects the change
+  $input.on('changeDate', function () {
+    $(this).trigger('change');
+  });
+
+  if (hasButton) {
+    this.$('.input-group-addon, .input-group-text, .input-group-append, .input-group-prepend')
+      .on('click.afBootstrapDatepicker', function (event) {
+        $input.datepicker('show');
+      });
+  }
 
   // set and reactively update values
   var previousValue;
@@ -106,7 +125,10 @@ Template.afBootstrapDatepicker.onRendered(function onRendered() {
 });
 
 Template.afBootstrapDatepicker.onDestroyed(function () {
-  var $input = this.data.atts.buttonClasses ? this.$('.input-group.date') : this.$('input');
+  var $input = this.$('input');
+  $input.off('changeDate');
+  this.$('.input-group-addon, .input-group-text, .input-group-append, .input-group-prepend')
+    .off('.afBootstrapDatepicker');
   $input.datepicker('remove');
 });
 
